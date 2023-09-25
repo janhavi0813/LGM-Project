@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Style the header */
+        header {
+          background-color: #f0f0f0;
+          padding: 20px;
+          text-align: center;
+        }
+    
+        /* Style the input and button */
+        input, button {
+          font-family: Arial, sans-serif;
+          font-size: 16px;
+          padding: 10px;
+          margin: 10px;
+        }
+    
+        /* Style the list */
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+        }
+    
+        /* Style the list items */
+        li {
+          cursor: pointer;
+          padding: 10px;
+          border-bottom: 1px solid #ddd;
+        }
+    
+        /* Style the checked items */
+        li.checked {
+          color: green;
+          text-decoration: line-through;
+        }
+    
+        /* Style the trash icon */
+        .trash {
+          float: right;
+          color: red;
+        }
+      </style>
+</head>
+<body>
+    <header>
+        <h1>My To Do List</h1>
+        <input type="text" id="input" placeholder="Enter a new task...">
+        <button id="add" onclick="newElement()">Add</button>
+      </header>
+      <ul id="list">
+        
+      </ul>
+      <script>
+        // Get the input, button and list elements
+        var input = document.getElementById("input");
+        var add = document.getElementById("add");
+        var list = document.getElementById("list");
+    
+        // Create a new list item when clicking on the add button
+        function newElement() {
+          // Check if the input is not empty
+          if (input.value.trim() === "") {
+            alert("You must write something!");
+            return;
+          }
+          
+          // Create a new li element
+          var li = document.createElement("li");
+          
+          // Set the text content of the li element to the input value
+          li.textContent = input.value;
+    
+          // Create a new i element for the trash icon
+          var trash = document.createElement("i");
+    
+          // Set the class and onclick attributes of the i element
+          trash.className = "far fa-trash-alt trash";
+          trash.onclick = function() {
+            // Remove the parent li element of the trash icon
+            this.parentElement.remove();
+          };
+    
+          // Append the trash icon to the li element
+          li.appendChild(trash);
+    
+          // Append the li element to the list
+          list.appendChild(li);
+    
+          // Clear the input value
+          input.value = "";
+        }
+    
+        // Add a "checked" symbol when clicking on a list item
+        list.addEventListener("click", function(event) {
+          // Check if the target element is an li element
+          if (event.target.tagName === "LI") {
+            // Toggle the "checked" class on the target element
+            event.target.classList.toggle("checked");
+          }
+        });
+      </script>
+</body>
+</html>
